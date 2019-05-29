@@ -2,7 +2,9 @@
   "require-dev": {
     "cyruscollier/wordpress-develop": "dev-master",
     "woocommerce/woocommerce": "dev-master",
-    "10up/wp_mock": "0.4.2"
+    "10up/wp_mock": "0.4.2",
+    "dealerdirect/phpcodesniffer-composer-installer": "*",
+    "wp-coding-standards/wpcs": "*"
   },
   "extra": {
     "installer-paths": {

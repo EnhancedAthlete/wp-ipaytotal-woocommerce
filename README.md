@@ -17,7 +17,9 @@ We will activate your account for live transactions.
 
 ## Develop
 
-Run `composer install` to install [WP_Mock](https://github.com/10up/wp_mock) (and its [PHP Unit 7](https://github.com/sebastianbergmann/phpunit) dependency) and wordpress-develop testing environment.
+Run `composer install` to install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), the  [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards), [WP_Mock](https://github.com/10up/wp_mock) (and its [PHP Unit 7](https://github.com/sebastianbergmann/phpunit) dependency) and wordpress-develop testing environment.
+
+Run `vendor/bin/phpcs` to see WordPress Coding Standards errors and run `vendor/bin/phpcbf` to automatically correct them where possible.
 
 WP_Mock tests can be run with:
 
