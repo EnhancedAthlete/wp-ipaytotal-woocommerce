@@ -1,6 +1,6 @@
 <?php
 /**
- * PHPUnit bootstrap file.
+ * PHPUnit bootstrap file for wordpress-develop.
  *
  * @package WP_IPayTotal_WooCommerce
  */
@@ -11,7 +11,7 @@ $_tests_dir = $plugin_root_dir . '/vendor/cyruscollier/wordpress-develop/tests/p
 
 $_wp_tests_config = $plugin_root_dir . '/tests/wordpress-develop/wp-tests-config.php';
 
-if( ! file_exists( $_wp_tests_config ) ) {
+if ( ! file_exists( $_wp_tests_config ) ) {
 	echo 'wp-tests-config.php not found.';
 	exit( 1 );
 }
@@ -21,6 +21,7 @@ define( 'WP_CONFIG_FILE_PATH', $_wp_tests_config );
 $_woocommerce_bootstrap = $plugin_root_dir . '/vendor/woocommerce/woocommerce/tests/bootstrap.php';
 
 // Later picked up by WooCommerce tests.
+// @codingStandardsIgnoreLine
 putenv( "WP_TESTS_DIR=$_tests_dir" );
 
 // Verify that Composer dependencies have been installed.
@@ -44,8 +45,5 @@ function _manually_load_plugin() {
 
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
-
-// Start up the WP testing environment.
-//require $_tests_dir . '/includes/bootstrap.php';
 
 require_once $_woocommerce_bootstrap;

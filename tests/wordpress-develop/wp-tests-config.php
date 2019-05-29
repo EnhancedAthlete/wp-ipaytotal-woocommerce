@@ -1,4 +1,9 @@
 <?php
+/**
+ * Configures the database and db user to use for tests.
+ *
+ * @package WP_IPayTotal_WooCommerce
+ */
 
 // * Path to the WordPress codebase you'd like to test. Add a forward slash in the end. */
 // if ( defined( 'WP_RUN_CORE_TESTS' ) && WP_RUN_CORE_TESTS ) {
@@ -47,6 +52,7 @@ define( 'SECURE_AUTH_SALT', 'put your unique phrase here' );
 define( 'LOGGED_IN_SALT', 'put your unique phrase here' );
 define( 'NONCE_SALT', 'put your unique phrase here' );
 
+// @codingStandardsIgnoreLine
 $table_prefix = 'wptests_';   // Only numbers, letters, and underscores please!
 
 define( 'WP_TESTS_DOMAIN', 'example.org' );
