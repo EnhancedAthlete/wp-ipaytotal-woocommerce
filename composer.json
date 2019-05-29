@@ -1,0 +1,25 @@
+{
+  "require-dev": {
+    "cyruscollier/wordpress-develop": "dev-master",
+    "woocommerce/woocommerce": "dev-master",
+    "10up/wp_mock": "0.4.2"
+  },
+  "extra": {
+    "installer-paths": {
+      "vendor/{$vendor}/{$name}": [
+        "woocommerce/woocommerce"
+      ]
+    }
+  },
+  "license": "GPL-3.0",
+  "authors": [
+    {
+      "name": "iPayTotal",
+      "email": "support@iPayTotal.com"
+    },
+    {
+      "name": "Brian Henry",
+      "email": "BrianHenryIE@gmail.com"
+    }
+  ]
+}
