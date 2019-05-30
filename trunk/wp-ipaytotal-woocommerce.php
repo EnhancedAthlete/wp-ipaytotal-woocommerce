@@ -27,8 +27,8 @@ function wowp_iptwpg_load_plugin_textdomain() {
 	load_plugin_textdomain( 'wp-ipaytotal-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
 }
 
-
 add_action( 'plugins_loaded', 'wowp_iptwpg_load_plugin_textdomain' );
+
 
 /**
  * Plugin initialization.
@@ -54,11 +54,10 @@ function wowp_iptwpg_ipaytotal_init() {
 	 * @return array
 	 */
 	function wowp_iptwpg_add_ipaytotal_gateway( $methods ) {
-		$methods[] = 'wowp_iptwpg_ipaytotal';
+		$methods[] = 'WOWP_IPTWPG_IPayTotal';
 		return $methods;
 	}
 }
-
 
 add_action( 'plugins_loaded', 'wowp_iptwpg_ipaytotal_init', 0 );
 

@@ -14,11 +14,13 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 /**
- * WOWP_IPTWPG_iPayTotal_API
+ * WOWP_IPTWPG_IPayTotal_API
  */
-class WOWP_IPTWPG_iPayTotal_API {
+class WOWP_IPTWPG_IPayTotal_API {
 
 	/**
+	 * The result of a version check on WooCommerce >= 3.0.
+	 *
 	 * @var bool True if WooCommerce version is below 3.0.
 	 */
 	public $wc_pre_30;
@@ -30,17 +32,42 @@ class WOWP_IPTWPG_iPayTotal_API {
 	 * Parses credit card details from POST.
 	 */
 	public function __construct() {
+
 		$this->wc_pre_30 = version_compare( WC_VERSION, '3.0.0', '<' );
 
-		$date_array = $_POST['wowp_iptwpg_ipaytotal-card-expiry'];
-		$date_array = explode( '/', str_replace( ' ', '', $date_array ) );
+		$name_on_card     = '';
+		$account_number   = '';
+		$expiration_month = '';
+		$expiration_year  = '';
+		$card_ccv         = 'no';
+
+		if ( isset( $_POST['wowp_iptwpg_ipaytotal-card-name'] ) ) {
+			$name_on_card = sanitize_text_field( wp_unslash( $_POST['wowp_iptwpg_ipaytotal-card-name'] ) );
+			$name_on_card = mb_convert_encoding( $name_on_card, 'HTML-ENTITIES' );
+		}
+
+		if ( isset( $_POST['wowp_iptwpg_ipaytotal-card-number'] ) ) {
+			$account_number = sanitize_text_field( wp_unslash( $_POST['wowp_iptwpg_ipaytotal-card-number'] ) );
+			$account_number = str_replace( array( ' ', '-' ), '', $account_number );
+		}
+
+		if ( isset( $_POST['wowp_iptwpg_ipaytotal-card-expiry'] ) ) {
+			$date_input       = sanitize_text_field( wp_unslash( $_POST['wowp_iptwpg_ipaytotal-card-expiry'] ) );
+			$date_array       = explode( '/', str_replace( ' ', '', $date_input ) );
+			$expiration_month = $date_array[0];
+			$expiration_year  = $date_array[1];
+		}
+
+		if ( isset( $_POST['wowp_iptwpg_ipaytotal-card-cvc'] ) ) {
+			$card_ccv = sanitize_text_field( wp_unslash( $_POST['wowp_iptwpg_ipaytotal-card-cvc'] ) );
+		}
 
 		$this->credit_card_data = array(
-			'nameCard'        => mb_convert_encoding( $_POST['wowp_iptwpg_ipaytotal-card-name'], 'HTML-ENTITIES' ),
-			'accountNumber'   => str_replace( array( ' ', '-' ), '', $_POST['wowp_iptwpg_ipaytotal-card-number'] ),
-			'expirationMonth' => $date_array[0],
-			'expirationYear'  => $date_array[1],
-			'CVVCard'         => ( isset( $_POST['wowp_iptwpg_ipaytotal-card-cvc'] ) ) ? $_POST['wowp_iptwpg_ipaytotal-card-cvc'] : 'no',
+			'nameCard'        => $name_on_card,
+			'accountNumber'   => $account_number,
+			'expirationMonth' => $expiration_month,
+			'expirationYear'  => $expiration_year,
+			'CVVCard'         => $card_ccv,
 		);
 	}
 
@@ -53,6 +80,9 @@ class WOWP_IPTWPG_iPayTotal_API {
 	 * @return string
 	 */
 	public function get_detalle_data( $products ) {
+
+		$detalle = array();
+
 		foreach ( $products as $product ) {
 			$detalle[] = array(
 				'id_producto' => $product->get_product_id(),
@@ -64,7 +94,8 @@ class WOWP_IPTWPG_iPayTotal_API {
 			);
 		}
 
-		$detalle_data = json_encode( $detalle );
+		$detalle_data = wp_json_encode( $detalle );
+
 		return $detalle_data;
 	}
 
@@ -76,7 +107,7 @@ class WOWP_IPTWPG_iPayTotal_API {
 	 */
 	public function get_credit_card_data() {
 
-		$credit_card_data = json_encode( $this->credit_card_data );
+		$credit_card_data = wp_json_encode( $this->credit_card_data );
 
 		return $credit_card_data;
 	}
@@ -107,8 +138,4 @@ class WOWP_IPTWPG_iPayTotal_API {
 	}
 
 }
-
-
-
-
 
