@@ -34,7 +34,7 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 		/**
 		 * The title for admin screens.
 		 */
-		$this->method_title = __( 'Credit/Debit Carda', 'wp-ipaytotal-woocommerce' );
+		$this->method_title = __( 'Credit/Debit Card', 'wp-ipaytotal-woocommerce' );
 
 		/**
 		 * The description for admin screens.
@@ -46,7 +46,7 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 		/**
 		 * The gateway's title on the frontend.
 		 */
-		$this->title = __( 'Credit/Debit Cardb', 'wp-ipaytotal-woocommerce' );
+		$this->title = __( 'Credit/Debit Card', 'wp-ipaytotal-woocommerce' );
 
 		/**
 		 * The gateway's icon.
