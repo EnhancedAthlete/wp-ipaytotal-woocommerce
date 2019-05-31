@@ -41,8 +41,8 @@ function wowp_iptwpg_ipaytotal_init() {
 		return;
 	}
 
-	include_once 'includes/wp-ipaytotal-woocommerce-admin.php';
-	include_once 'includes/wp-ipaytotal-woocommerce-api.php';
+	include_once 'includes/class-wowp-iptwpg-ipaytotal.php';
+	include_once 'includes/class-wowp-iptwpg-ipaytotal-api.php';
 
 	add_filter( 'woocommerce_payment_gateways', 'wowp_iptwpg_add_ipaytotal_gateway' );
 
