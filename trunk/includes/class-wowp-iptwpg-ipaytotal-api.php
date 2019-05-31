@@ -124,7 +124,11 @@ class WOWP_IPTWPG_IPayTotal_API {
 	 */
 	public function get_response_body( $response ) {
 
-		// get body response while get not error.
+		/**
+		 * Get body response while get not error.
+		 *
+		 * @var string $response_body
+		 */
 		$response_body = wp_remote_retrieve_body( $response );
 
 		foreach ( preg_split( "/\r?\n/", $response_body ) as $line ) {
