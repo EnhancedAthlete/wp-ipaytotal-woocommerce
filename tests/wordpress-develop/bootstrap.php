@@ -5,11 +5,12 @@
  * @package WP_IPayTotal_WooCommerce
  */
 
-$plugin_root_dir = dirname( dirname( dirname( __FILE__ ) ) );
+$project_root_dir = dirname( dirname( dirname( __FILE__ ) ) );
+$plugin_root_dir  = $project_root_dir . '/trunk';
 
-$_tests_dir = $plugin_root_dir . '/vendor/cyruscollier/wordpress-develop/tests/phpunit';
+$_tests_dir = $project_root_dir . '/vendor/cyruscollier/wordpress-develop/tests/phpunit';
 
-$_wp_tests_config = $plugin_root_dir . '/tests/wordpress-develop/wp-tests-config.php';
+$_wp_tests_config = $project_root_dir . '/tests/wordpress-develop/wp-tests-config.php';
 
 if ( ! file_exists( $_wp_tests_config ) ) {
 	echo 'wp-tests-config.php not found.';
@@ -18,7 +19,7 @@ if ( ! file_exists( $_wp_tests_config ) ) {
 
 define( 'WP_CONFIG_FILE_PATH', $_wp_tests_config );
 
-$_woocommerce_bootstrap = $plugin_root_dir . '/vendor/woocommerce/woocommerce/tests/bootstrap.php';
+$_woocommerce_bootstrap = $project_root_dir . '/vendor/woocommerce/woocommerce/tests/bootstrap.php';
 
 // Later picked up by WooCommerce tests.
 // @codingStandardsIgnoreLine
@@ -38,10 +39,10 @@ require_once $_tests_dir . '/includes/functions.php';
  */
 function _manually_load_plugin() {
 
-	$plugin_root_dir = dirname( dirname( dirname( __FILE__ ) ) );
+	$project_root_dir = dirname( dirname( dirname( __FILE__ ) ) );
 
-	require_once $plugin_root_dir . '/vendor/woocommerce/woocommerce/woocommerce.php';
-	require_once $plugin_root_dir . '/trunk/wp-ipaytotal-woocommerce.php';
+	require_once $project_root_dir . '/vendor/woocommerce/woocommerce/woocommerce.php';
+	require_once $project_root_dir . '/trunk/wp-ipaytotal-woocommerce.php';
 
 }
 tests_add_filter( 'muplugins_loaded', '_manually_load_plugin' );
