@@ -96,6 +96,47 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Verify the content of the action links.
+	 *
+	 * TODO: The Deactivate link isn't returned when the filter is run in the test, suggesting it's
+	 * not being run on plugins.php page as it should.
+	 */
+	public function test_wowp_iptwpg_ipaytotal_action_links() {
+
+		$expected_anchor    = get_site_url() . '/wp-admin/admin.php?page=wc-settings&tab=checkout';
+		$expected_link_text = 'Settings';
+
+		global $plugin_root_dir;
+
+		$plugin_basename = $plugin_root_dir . '/wp-ipaytotal-woocommerce.php';
+
+		$filter_name = 'plugin_action_links_' . ltrim( $plugin_basename, '/' );
+
+		$this->go_to( '/wp-admin/plugins.php/ ' );
+
+		$plugin_action_links = apply_filters( $filter_name, array() );
+
+		$first_link = $plugin_action_links[0];
+
+		$dom = new DOMDocument();
+
+		@$dom->loadHtml( mb_convert_encoding( $first_link, 'HTML-ENTITIES', 'UTF-8' ) );
+
+		$nodes = $dom->getElementsByTagName( 'a' );
+
+		$this->assertCount( 1, $nodes );
+
+		/** @var DOMNode $node */
+		$node = $nodes[0];
+
+		$actual_anchor    = $node->getAttribute( 'href' );
+		$actual_link_text = $node->nodeValue;
+
+		$this->assertEquals( $expected_anchor, $actual_anchor );
+		$this->assertEquals( $expected_link_text, $actual_link_text );
+	}
+
+	/**
 	 * Ensure `wowp_iptwpg_ipaytotal_custom_credit_card_fields` has been added to `woocommerce_credit_card_form_fields` filter correctly.
 	 */
 	function test_add_filter_woocommerce_credit_card_form_fields_wowp_iptwpg_ipaytotal_custom_credit_card_fields() {
