@@ -65,6 +65,17 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 	}
 
 	/**
+	 * Verify the filter function correctly adds the payment gateway to WooCommerce.
+	 */
+	public function test_woocommerce_payment_gateways_populated() {
+
+		$woocommerce_payment_gateways = apply_filters( 'woocommerce_payment_gateways', array() );
+
+		$this->assertContains( 'WOWP_IPTWPG_IPayTotal', $woocommerce_payment_gateways );
+
+	}
+
+	/**
 	 * Ensure the `wowp_iptwpg_ipaytotal_action_links` function is added to the `plugin_action_links_*` fitler.
 	 */
 	function test_add_filter_plugin_action_links_wowp_iptwpg_ipaytotal_action_links() {
