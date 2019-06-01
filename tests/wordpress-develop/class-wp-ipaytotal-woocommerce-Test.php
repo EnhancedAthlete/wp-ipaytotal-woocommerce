@@ -124,10 +124,10 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 
 		$nodes = $dom->getElementsByTagName( 'a' );
 
-		$this->assertCount( 1, $nodes );
+		$this->assertEquals( 1, $nodes->length );
 
 		/** @var DOMNode $node */
-		$node = $nodes[0];
+		$node = $nodes->item( 0 );
 
 		$actual_anchor    = $node->getAttribute( 'href' );
 		$actual_link_text = $node->nodeValue;
