@@ -71,7 +71,7 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 		$this->init_form_fields();
 
 		/**
-		 * Load the user settings from database.
+		 * Load the user settings from database using the superclass method.
 		 *
 		 * @see https://docs.woocommerce.com/document/settings-api/
 		 */

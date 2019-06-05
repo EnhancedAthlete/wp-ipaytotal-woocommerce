@@ -32,6 +32,18 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
 	}
 
+	/**
+	 * init_form_fields is called by the constructor.
+	 */
+	public function test_init_form_fields() {
+
+		$gateway = new WOWP_IPTWPG_IPayTotal();
+
+		// Verify the two form fields are added:
+		$this->assertEqualSets( [ 'enabled', 'ipt_key_secret' ], array_keys( $gateway->form_fields ) );
+		
+	}
+
 
 	/**
 	 * Validation is currently unimplemented and always passes.
