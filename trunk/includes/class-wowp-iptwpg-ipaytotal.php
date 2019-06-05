@@ -82,7 +82,11 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 			$this->$setting_key = $value;
 		}
 
-		// Further check of SSL if you want.
+		/**
+		 * Further check of SSL if you want. Notifies admin if SSL is not enabled.
+		 *
+		 * @see https://www.cloudways.com/blog/build-woocommerce-payment-gateway-plugin/
+		 */
 		add_action( 'admin_notices', array( $this, 'do_ssl_check' ) );
 
 		// Add the handler to save settings using the WC_Settings_API superclass process_admin_options method.
@@ -113,6 +117,18 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 
 	}
 
+	/**
+	 * Adds an SSL check to warn admins if the checkout page might not be encrypted.
+	 *
+	 * @see https://www.cloudways.com/blog/build-woocommerce-payment-gateway-plugin/
+	 */
+	public function do_ssl_check() {
+		if ( $this->enabled == 'yes' ) {
+			if ( get_option( 'woocommerce_force_ssl_checkout' ) == 'no' ) {
+				echo '<div class="error"><p>' . sprintf( __( '<strong>%1$s</strong> is enabled and WooCommerce is not forcing the SSL certificate on your checkout page. Please ensure that you have a valid SSL certificate and that you are <a href="%2$s">forcing the checkout pages to be secured.</a>' ), $this->method_title, admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ) . '</p></div>';
+			}
+		}
+	}
 
 	/**
 	 * Determine the credit card type (Visa/Amex etc.) by running a regex on its number.
