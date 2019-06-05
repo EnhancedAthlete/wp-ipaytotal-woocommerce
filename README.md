@@ -1,4 +1,5 @@
 # wp-ipaytotal-woocommerce
+
 Please Note API key is mandatory to complete the integration 
 Steps to get the API key 
 
@@ -15,6 +16,8 @@ Once test is successful please check the transaction in your merchant dashboard 
 reply to this email with the successful test transaction screenshot . 
 We will activate your account for live transactions. 
 
+
+
 ## Develop
 
 Run `composer install` to install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), the  [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards), [WP_Mock](https://github.com/10up/wp_mock) (and its [PHP Unit 7](https://github.com/sebastianbergmann/phpunit) dependency) and wordpress-develop testing environment.
@@ -24,7 +27,7 @@ Run `vendor/bin/phpcs` to see WordPress Coding Standards errors and run `vendor/
 WP_Mock tests can be run with:
 
 ```
-phpunit ./tests/wp-mock --bootstrap ./tests/wp-mock/bootstrap.php
+phpunit -c tests/wp-mock/phpunit.xml
 ```
 
 The wordpress-develop tests are configured to require a local [MySQL database](https://dev.mysql.com/downloads/mysql/) (which gets wiped each time) and this plugin is set to require a database called `wordpress_tests` and a user named `wordpress-develop` with the password `wordpress-develop`. These tests also require PHP Unit 6, which can be downloaded and make executable with:
@@ -40,18 +43,12 @@ Open MySQL shell:
 mysql -u root -p
 ```
 
-Create the database:
+Create the database and user, granting the user full permissions:
 
 ```
 CREATE DATABASE wordpress_tests;
-```
-
-The database user can be set up in the MySQL CLI using:
-
-```
 CREATE USER 'wordpress-develop'@'%' IDENTIFIED WITH mysql_native_password BY 'wordpress-develop'
 GRANT ALL PRIVILEGES ON wordpress_tests.* TO 'wordpress-develop'@'%';
-FLUSH PRIVILEGES;
 ```
 
 ```
@@ -61,6 +58,6 @@ quit
 The wordpress-develop tests can then be run with:
 
 ```
-./phpunit-6.5.9.phar tests --bootstrap ./tests/wordpress-develop/bootstrap.php
+./phpunit-6.5.9.phar -c tests/wordpress-develop/phpunit.xml 
 ```
 
