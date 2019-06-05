@@ -136,7 +136,7 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 			return false;
 		}
 
-		$cards   = array(
+		$cards = array(
 			'visa'       => '(4\d{12}(?:\d{3})?)',
 			'amex'       => '(3[47]\d{13})',
 			'jcb'        => '(35[2-8][89]\d\d\d{10})',
@@ -145,13 +145,16 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 			'mastercard' => '(5[1-5]\d{14})',
 			'switch'     => '(?:(?:(?:4903|4905|4911|4936|6333|6759)\d{12})|(?:(?:564182|633110)\d{10})(\d\d)?\d?)',
 		);
+
 		$names   = array( 'Visa', 'American Express', 'JCB', 'Maestro', 'Solo', 'Mastercard', 'Switch' );
 		$matches = array();
 		$pattern = '#^(?:' . implode( '|', $cards ) . ')$#';
 		$result  = preg_match( $pattern, str_replace( ' ', '', $cc ), $matches );
+
 		if ( $extra_check && $result > 0 ) {
-			$result = ( validatecard( $cc ) ) ? 1 : 0;
+			$result = ( $this->validate_card( $cc ) ) ? 1 : 0;
 		}
+
 		$card = ( $result > 0 ) ? $names[ count( $matches ) - 2 ] : false;
 
 		switch ( $card ) {
@@ -171,6 +174,42 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 
 	}
 
+	/**
+	 * Validates the card number using the Luhn algorithm.
+	 *
+	 * @see http://web.archive.org/web/20080918014358/http://www.roughguidetophp.com/10-regular-expressions-you-just-cant-live-without-in-php/#Verifying%20Credit%20Card%20Numbers
+	 * @see https://en.wikipedia.org/wiki/Luhn_algorithm
+	 *
+	 * @param string $card_number The credit card number to check.
+	 *
+	 * @return bool True if the card number is valid.
+	 */
+	protected function validate_card( $card_number ) {
+
+		$card_number = preg_replace( '/\D|\s/', '', $card_number );  // strip any non-digits.
+		$card_length = strlen( $card_number );
+		$parity      = $card_length % 2;
+		$sum         = 0;
+
+		for ( $i = 0; $i < $card_length; $i++ ) {
+
+			$digit = $card_number[ $i ];
+
+			if ( $i % 2 === $parity ) {
+				$digit = $digit * 2;
+			}
+
+			if ( $digit > 9 ) {
+				$digit = $digit - 9;
+			}
+
+			$sum = $sum + $digit;
+		}
+
+		$is_valid = ( 0 === $sum % 10 );
+
+		return $is_valid;
+	}
 
 	/**
 	 * Response handler for payment gateway.

@@ -59,26 +59,26 @@ class WOWP_IPTWPG_IPayTotal_Test extends \WP_Mock\Tools\TestCase {
 		$expected = '3';
 
 		$card_number = '5555 5555 5555 4444';
-		$result      = $gateway->getCreditCardType( $card_number );
+		$result      = $gateway->getCreditCardType( $card_number, true );
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
 		$card_number = '5105 1051 0510 5100';
-		$result      = $gateway->getCreditCardType( $card_number );
+		$result      = $gateway->getCreditCardType( $card_number, true );
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
 		// VISA
 		$expected = '2';
 
 		$card_number = '4111 1111 1111 1111';
-		$result      = $gateway->getCreditCardType( $card_number );
+		$result      = $gateway->getCreditCardType( $card_number, true );
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
 		$card_number = '4012 8888 888 81881';
-		$result      = $gateway->getCreditCardType( $card_number );
+		$result      = $gateway->getCreditCardType( $card_number, true );
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
 		$card_number = '4222 2222 2222 2';
-		$result      = $gateway->getCreditCardType( $card_number );
+		$result      = $gateway->getCreditCardType( $card_number, true );
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
 	}
