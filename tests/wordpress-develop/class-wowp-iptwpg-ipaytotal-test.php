@@ -26,6 +26,20 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 		// The admin area title should be:
 		$this->assertEquals( 'Credit/Debit Card', $gateway->method_title );
 
+		// Ensure method_description is:
+		$this->assertEquals( 'IPayTotal Payment Gateway Plug-in for WooCommerce', $gateway->method_description );
+
+		// The title shown on to users should be:
+		$this->assertEquals( 'Credit/Debit Card', $gateway->title );
+
+		$this->assertNull( $gateway->icon );
+		$this->assertTrue( $gateway->has_fields );
+
+		$this->assertEqualSets( [ 'default_credit_card_form' ], $gateway->supports );
+
+		// The gateway default enabled setting is 'no'
+		$this->assertEquals( 'no', $gateway->enabled );
+
 	}
 
 	/**
