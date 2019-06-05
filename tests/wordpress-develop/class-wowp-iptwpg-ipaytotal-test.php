@@ -32,6 +32,15 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
 	}
 
+
+	/**
+	 * Validation is currently unimplemented and always passes.
+	 */
+	public function test_validate_fields() {
+
+		$validate_fields = $this->wowp_iptwpg_ipaytotal->validate_fields();
+
+		$this->assertTrue( $validate_fields );
 	}
 
 }
