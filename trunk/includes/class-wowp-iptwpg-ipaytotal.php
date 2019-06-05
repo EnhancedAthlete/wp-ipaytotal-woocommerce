@@ -256,8 +256,8 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 		$card_type   = $this->getCreditCardType( $card_number );
 		$card_no     = str_replace( array( ' ', '-' ), '', $card_number );
 
-		$date_array = sanitize_text_field( wp_unslash( $_POST['wowp_iptwpg_ipaytotal-card-expiry'] ) );
-		$date_array = explode( '/', str_replace( ' ', '', $date_array ) );
+		$date_input = sanitize_text_field( wp_unslash( $_POST['wowp_iptwpg_ipaytotal-card-expiry'] ) );
+		$date_array = explode( '/', str_replace( ' ', '', $date_input ) );
 		$date_month = $date_array[0];
 		$date_year  = $date_array[1];
 
