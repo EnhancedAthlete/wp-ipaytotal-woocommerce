@@ -123,12 +123,15 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 	 * '3' - For Mastercard.
 	 * '4' - For Discover & others.
 	 *
+	 * @see https://stackoverflow.com/a/174772/
+	 * @see http://web.archive.org/web/20080918014358/http://www.roughguidetophp.com/10-regular-expressions-you-just-cant-live-without-in-php/#Verifying%20Credit%20Card%20Numbers
+	 *
 	 * @param string $cc The credit card number.
 	 * @param bool   $extra_check Flag to determine if validatecard function should be run.
 	 *
 	 * @return bool|string false if the card type cannot be determined, '1' for Amex, '2' for Visa, '3' for Mastercard. '4' for other.
 	 */
-	private function getCreditCardType( $cc, $extra_check = false ) {
+	public function getCreditCardType( $cc, $extra_check = false ) {
 		if ( empty( $cc ) ) {
 			return false;
 		}
