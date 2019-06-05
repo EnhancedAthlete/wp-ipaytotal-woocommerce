@@ -7,13 +7,9 @@
 
 class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
-	/** @var WOWP_IPTWPG_IPayTotal */
-	protected $wowp_iptwpg_ipaytotal;
 
 	public function setUp() {
 		parent::setUp();
-
-		$this->wowp_iptwpg_ipaytotal = new WOWP_IPTWPG_IPayTotal();
 
 	}
 
@@ -22,7 +18,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 	 */
 	public function test_constructor() {
 
-		$gateway = $this->wowp_iptwpg_ipaytotal;
+		$gateway = new WOWP_IPTWPG_IPayTotal();
 
 		// The gateway id should be:
 		$this->assertEquals( 'wowp_iptwpg_ipaytotal', $gateway->id );
@@ -50,7 +46,9 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 	 */
 	public function test_validate_fields() {
 
-		$validate_fields = $this->wowp_iptwpg_ipaytotal->validate_fields();
+		$gateway = new WOWP_IPTWPG_IPayTotal();
+
+		$validate_fields = $gateway->validate_fields();
 
 		$this->assertTrue( $validate_fields );
 	}
