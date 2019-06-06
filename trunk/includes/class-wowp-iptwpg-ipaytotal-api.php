@@ -25,6 +25,12 @@ class WOWP_IPTWPG_IPayTotal_API {
 	 */
 	public $wc_pre_30;
 
+	/**
+	 * The credit card data parsed from the $_POST submission.
+	 *
+	 * @var array
+	 */
+	private $credit_card_data;
 
 	/**
 	 * WOWP_IPTWPG_iPayTotal_API constructor.
@@ -35,10 +41,10 @@ class WOWP_IPTWPG_IPayTotal_API {
 
 		$this->wc_pre_30 = version_compare( WC_VERSION, '3.0.0', '<' );
 
-		$name_on_card     = '';
-		$account_number   = '';
-		$expiration_month = '';
-		$expiration_year  = '';
+		$name_on_card     = null;
+		$account_number   = null;
+		$expiration_month = null;
+		$expiration_year  = null;
 		$card_ccv         = 'no';
 
 		if ( isset( $_POST['wowp_iptwpg_ipaytotal-card-name'] ) ) {
@@ -75,7 +81,7 @@ class WOWP_IPTWPG_IPayTotal_API {
 	/**
 	 * Parses WooCommerce products to JSON for API.
 	 *
-	 * @param WC_Product[] $products The order's products to include in the API call.
+	 * @param WC_Order_Item_Product[] $products The order's products to include in the API call.
 	 *
 	 * @return string
 	 */
