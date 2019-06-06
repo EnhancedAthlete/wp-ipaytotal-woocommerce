@@ -3,6 +3,7 @@
  * Configures the database and db user to use for tests.
  *
  * @package WP_IPayTotal_WooCommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  */
 
 // * Path to the WordPress codebase you'd like to test. Add a forward slash in the end. */

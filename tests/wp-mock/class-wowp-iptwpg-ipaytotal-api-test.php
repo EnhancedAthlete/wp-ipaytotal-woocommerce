@@ -3,6 +3,7 @@
  * Tests for gateway helper methods defined in -api class.
  *
  * @package wp-ipaytotal-woocommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  */
 
 /**

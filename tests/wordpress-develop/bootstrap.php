@@ -3,6 +3,7 @@
  * PHPUnit bootstrap file for wordpress-develop.
  *
  * @package WP_IPayTotal_WooCommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  */
 
 $project_root_dir = dirname( dirname( dirname( __FILE__ ) ) );

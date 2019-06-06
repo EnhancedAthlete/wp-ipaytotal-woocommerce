@@ -3,6 +3,7 @@
  * PHPUnit bootstrap file for WP_Mock.
  *
  * @package WP_IPayTotal_WooCommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  */
 
 $project_root_dir = dirname( dirname( dirname( __FILE__ ) ) );

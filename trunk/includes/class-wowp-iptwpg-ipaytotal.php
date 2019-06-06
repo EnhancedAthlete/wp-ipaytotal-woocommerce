@@ -4,6 +4,7 @@
  *
  * @package wp-ipaytotal-woocommerce
  * @author  iPayTotal Ltd
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  * @since   1.0.0
  */
 

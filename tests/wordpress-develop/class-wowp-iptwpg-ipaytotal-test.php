@@ -5,6 +5,7 @@
  * phpcs:disable Generic.Classes.DuplicateClassName.Found
  *
  * @package wp-ipaytotal-woocommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  */
 
 /**

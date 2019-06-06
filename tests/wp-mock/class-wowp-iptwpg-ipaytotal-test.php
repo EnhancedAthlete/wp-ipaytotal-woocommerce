@@ -3,6 +3,7 @@
  * Unit test class for testing WOWP_IPTWPG_IPayTotal with WP_Mock. *
  *
  * @package wp-ipaytotal-woocommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  *
  * phpcs:disable Generic.Classes.DuplicateClassName.Found
  */

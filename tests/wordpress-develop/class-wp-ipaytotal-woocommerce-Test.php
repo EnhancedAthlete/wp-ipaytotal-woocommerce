@@ -3,6 +3,7 @@
  * Class wp-ipaytotal-woocommerce-test
  *
  * @package wp-ipaytotal-woocommerce
+ * @author Brian Henry <BrianHenryIE@gmail.com>
  */
 
 /**
