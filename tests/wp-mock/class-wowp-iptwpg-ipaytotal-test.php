@@ -1,12 +1,22 @@
 <?php
 /**
+ * Unit test class for testing WOWP_IPTWPG_IPayTotal with WP_Mock. *
  *
  * @package wp-ipaytotal-woocommerce
+ *
+ * phpcs:disable Generic.Classes.DuplicateClassName.Found
  */
 
-
+/**
+ * Tests the card type method.
+ *
+ * Class WOWP_IPTWPG_IPayTotal_Test
+ */
 class WOWP_IPTWPG_IPayTotal_Test extends \WP_Mock\Tools\TestCase {
 
+	/**
+	 * Prepares the WP_Mock mocks required for the WOWP_IPTWPG_IPayTotal constructor.
+	 */
 	public function setUp(): void {
 		\WP_Mock::setUp();
 
@@ -55,7 +65,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends \WP_Mock\Tools\TestCase {
 
 		$gateway = new WOWP_IPTWPG_IPayTotal();
 
-		// Mastercard
+		// Mastercard.
 		$expected = '3';
 
 		$card_number = '5555 5555 5555 4444';
@@ -66,7 +76,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends \WP_Mock\Tools\TestCase {
 		$result      = $gateway->getCreditCardType( $card_number, true );
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
-		// VISA
+		// VISA.
 		$expected = '2';
 
 		$card_number = '4111 1111 1111 1111';
@@ -82,4 +92,5 @@ class WOWP_IPTWPG_IPayTotal_Test extends \WP_Mock\Tools\TestCase {
 		$this->assertEquals( $expected, $result, "input: $card_number" );
 
 	}
+
 }

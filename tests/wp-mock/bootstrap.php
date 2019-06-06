@@ -8,7 +8,7 @@
 $project_root_dir = dirname( dirname( dirname( __FILE__ ) ) );
 require_once $project_root_dir . '/vendor/autoload.php'; // Composer autoloader.
 
-$plugin_root_dir  = $project_root_dir . '/trunk';
+$plugin_root_dir = $project_root_dir . '/trunk';
 
 WP_Mock::bootstrap();
 

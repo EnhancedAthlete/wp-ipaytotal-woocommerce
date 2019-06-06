@@ -118,6 +118,8 @@ class WOWP_IPTWPG_IPayTotal_API {
 	 *
 	 * Removes newlines and returns JSON object before "|" character.
 	 *
+	 * @see https://www.cloudways.com/blog/build-woocommerce-payment-gateway-plugin/
+	 *
 	 * @param array|WP_Error $response The response to the API POST request.
 	 *
 	 * @return array|mixed|object

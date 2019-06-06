@@ -2,7 +2,7 @@
 /**
  * Class wp-ipaytotal-woocommerce-test
  *
- * @package
+ * @package wp-ipaytotal-woocommerce
  */
 
 /**
@@ -16,7 +16,7 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 *
+	 * Ensure the function which calls `load_plugin_textdomain` is enqueued at the `plugins_loaded` action.
 	 */
 	public function test_add_action_plugins_loaded_wowp_iptwpg_load_plugin_textdomain() {
 
@@ -100,6 +100,9 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 	 *
 	 * TODO: The Deactivate link isn't returned when the filter is run in the test, suggesting it's
 	 * not being run on plugins.php page as it should.
+	 *
+	 * phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	 * phpcs:disable WordPress.PHP.NoSilencedErrors.Discouraged
 	 */
 	public function test_wowp_iptwpg_ipaytotal_action_links() {
 
@@ -126,7 +129,6 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 
 		$this->assertEquals( 1, $nodes->length );
 
-		/** @var DOMNode $node */
 		$node = $nodes->item( 0 );
 
 		$actual_anchor    = $node->getAttribute( 'href' );
@@ -159,6 +161,9 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 	 * This method would be more appropriate in the WC_Payment_Gateway_CC subclass.
 	 *
 	 * @see WC_Payment_Gateway_CC
+	 *
+	 * phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
+	 * phpcs:disable WordPress.PHP.NoSilencedErrors.Discouraged
 	 */
 	public function test_wowp_iptwpg_ipaytotal_custom_credit_card_fields() {
 
@@ -182,7 +187,6 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 			// Each field's html is a paragraph.
 			$this->assertCount( 1, $paragraphs );
 
-			/** @var DOMNode $node */
 			$paragraph = $paragraphs->item( 0 );
 
 			// Each paragraph has two children.

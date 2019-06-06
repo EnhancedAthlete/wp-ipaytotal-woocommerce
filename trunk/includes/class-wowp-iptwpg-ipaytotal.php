@@ -95,7 +95,6 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 		}
 	}
 
-
 	/**
 	 * Initializes $this->form_fields array to define gateway settings.
 	 */
@@ -123,9 +122,11 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 	 * @see https://www.cloudways.com/blog/build-woocommerce-payment-gateway-plugin/
 	 */
 	public function do_ssl_check() {
-		if ( $this->enabled == 'yes' ) {
-			if ( get_option( 'woocommerce_force_ssl_checkout' ) == 'no' ) {
-				echo '<div class="error"><p>' . sprintf( __( '<strong>%1$s</strong> is enabled and WooCommerce is not forcing the SSL certificate on your checkout page. Please ensure that you have a valid SSL certificate and that you are <a href="%2$s">forcing the checkout pages to be secured.</a>' ), $this->method_title, admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ) . '</p></div>';
+		if ( 'yes' === $this->enabled ) {
+			if ( 'no' === get_option( 'woocommerce_force_ssl_checkout' ) ) {
+				$allowed_tags = wp_kses_allowed_html( '<div class="error"><p><strong></strong><a href=""></a></p></div>' );
+				/* translators: The payment gateway title for admin screens. */
+				echo wp_kses( '<div class="error"><p>' . sprintf( __( '<strong>%1$s</strong> is enabled and WooCommerce is not forcing the SSL certificate on your checkout page. Please ensure that you have a valid SSL certificate and that you are <a href="%2$s">forcing the checkout pages to be secured.</a>' ), $this->method_title, admin_url( 'admin.php?page=wc-settings&tab=checkout' ) ) . '</p></div>', $allowed_tags );
 			}
 		}
 	}
@@ -318,7 +319,7 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 
 		if ( is_wp_error( $result ) ) {
 
-			throw new Exception( __( 'There is issue for connectin payment gateway. Sorry for the inconvenience.', 'wp-ipaytotal-woocommerce' ) );
+			throw new Exception( __( 'There is issue connecting to the payment gateway. Sorry for the inconvenience.', 'wp-ipaytotal-woocommerce' ) );
 
 		} elseif ( empty( $result['body'] ) ) {
 

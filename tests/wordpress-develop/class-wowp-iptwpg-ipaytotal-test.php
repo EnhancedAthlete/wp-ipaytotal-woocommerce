@@ -1,13 +1,20 @@
 <?php
 /**
+ * Tests for WOWP_IPTWPG_IPayTotal. Tests constructor values, user input field setup, payment submission.
+ *
+ * phpcs:disable Generic.Classes.DuplicateClassName.Found
  *
  * @package wp-ipaytotal-woocommerce
  */
 
-
+/**
+ * Class WOWP_IPTWPG_IPayTotal_Test
+ */
 class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
-
+	/**
+	 * Sets up the environment. Imports WP_Error.
+	 */
 	public function setUp() {
 		parent::setUp();
 
@@ -17,22 +24,22 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 	}
 
 	/**
-	 * Ensure the class is configured correctly.
+	 * Ensure the WOWP_IPTWPG_IPayTotal is configured correctly.
 	 */
 	public function test_constructor() {
 
 		$gateway = new WOWP_IPTWPG_IPayTotal();
 
-		// The gateway id should be:
+		// The gateway id should be set.
 		$this->assertEquals( 'wowp_iptwpg_ipaytotal', $gateway->id );
 
-		// The admin area title should be:
+		// The admin area title should be set.
 		$this->assertEquals( 'Credit/Debit Card', $gateway->method_title );
 
-		// Ensure method_description is:
+		// Ensure method_description is set.
 		$this->assertEquals( 'IPayTotal Payment Gateway Plug-in for WooCommerce', $gateway->method_description );
 
-		// The title shown on to users should be:
+		// The title shown on to users should be set.
 		$this->assertEquals( 'Credit/Debit Card', $gateway->title );
 
 		$this->assertNull( $gateway->icon );
@@ -40,7 +47,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
 		$this->assertEqualSets( [ 'default_credit_card_form' ], $gateway->supports );
 
-		// The gateway default enabled setting is 'no'
+		// The gateway default enabled setting is 'no'.
 		$this->assertEquals( 'no', $gateway->enabled );
 
 	}
@@ -52,7 +59,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
 		$gateway = new WOWP_IPTWPG_IPayTotal();
 
-		// Verify the two form fields are added:
+		// Verify the two form fields are added.
 		$this->assertEqualSets( [ 'enabled', 'ipt_key_secret' ], array_keys( $gateway->form_fields ) );
 
 	}
@@ -132,7 +139,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
 				// Ensure all required fields are present.
 				foreach ( $required_fields as $required_field ) {
-					$this->assertTrue( in_array( $required_field, $fields ), 'Missing API field: ' . $required_field . 'asd' );
+					$this->assertTrue( in_array( $required_field, $fields, true ), 'Missing API field: ' . $required_field . 'asd' );
 				}
 
 				// Ensure all fields being submitted to the API are valid.
@@ -145,13 +152,13 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 			3
 		);
 
-		// Prepare order
+		// Prepare dummy order.
 		$order = WC_Helper_Order::create_order();
 
-		// Set $_POST
-		 $_POST['wowp_iptwpg_ipaytotal-card-number'] = '4111 1111 1111 1111';
-		 $_POST['wowp_iptwpg_ipaytotal-card-expiry'] = '10/2020';
-		 $_POST['wowp_iptwpg_ipaytotal-card-cvc']    = '123';
+		// Set $_POST variables.
+		$_POST['wowp_iptwpg_ipaytotal-card-number'] = '4111 1111 1111 1111';
+		$_POST['wowp_iptwpg_ipaytotal-card-expiry'] = '10/2020';
+		$_POST['wowp_iptwpg_ipaytotal-card-cvc']    = '123';
 
 		try {
 			$gateway->process_payment( $order->get_id() );
@@ -160,8 +167,8 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 
 			$this->assertEquals( 'There is issue connecting to the payment gateway. Sorry for the inconvenience.', $e->getMessage() );
 		}
-	}
 
+	}
 
 	/**
 	 * Validation is currently unimplemented and always passes.
