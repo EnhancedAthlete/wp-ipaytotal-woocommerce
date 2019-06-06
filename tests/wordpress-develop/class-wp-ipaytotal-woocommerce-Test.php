@@ -128,7 +128,7 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 
 		$filter_name = 'plugin_action_links_' . ltrim( $plugin_basename, '/' );
 
-		$this->go_to( '/wp-admin/plugins.php/ ' );
+		$this->go_to( '/wp-admin/plugins.php' );
 
 		$plugin_action_links = apply_filters( $filter_name, array() );
 
