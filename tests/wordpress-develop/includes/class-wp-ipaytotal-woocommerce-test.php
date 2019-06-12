@@ -87,9 +87,9 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 
 		global $plugin_root_dir;
 
-		$plugin_basename = $plugin_root_dir . '/wp-ipaytotal-woocommerce.php';
+		$plugin_basename = 'wp-ipaytotal-woocommerce/wp-ipaytotal-woocommerce.php';
 
-		$filter_name       = 'plugin_action_links_' . ltrim( $plugin_basename, '/' );
+		$filter_name       = 'plugin_action_links_' . $plugin_basename;
 		$expected_priority = 10;
 
 		$wp_ipaytotal_woocommerce = $GLOBALS['wp_ipaytotal_woocommerce'];

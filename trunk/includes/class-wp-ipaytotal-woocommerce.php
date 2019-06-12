@@ -95,7 +95,7 @@ class WP_IPayTotal_WooCommerce {
 
 		$this->plugin_root_dir = dirname( dirname( __FILE__ ) );
 
-		$this->plugin_basename = ltrim( $this->plugin_root_dir . '/' . $this->plugin_name . '.php', '/' );
+		$this->plugin_basename = 'wp-ipaytotal-woocommerce/wp-ipaytotal-woocommerce.php';
 
 		$this->load_dependencies();
 		$this->set_locale();
