@@ -20,7 +20,7 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 		$expected_priority = 0;
 
 		$wp_ipaytotal_woocommerce = $GLOBALS['wp_ipaytotal_woocommerce'];
-		$function = array( $wp_ipaytotal_woocommerce, 'woocommerce_init' );
+		$function                 = array( $wp_ipaytotal_woocommerce, 'woocommerce_init' );
 
 		$actual_action_priority = has_action( $action_name, $function );
 
@@ -40,7 +40,7 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 		$expected_priority = 10;
 
 		$wp_ipaytotal_woocommerce = $GLOBALS['wp_ipaytotal_woocommerce'];
-		$function          = array( $wp_ipaytotal_woocommerce, 'add_gateway_to_woocommerce' );
+		$function                 = array( $wp_ipaytotal_woocommerce, 'add_gateway_to_woocommerce' );
 
 		$actual_filter_priority = has_filter( $filter_name, $function );
 
