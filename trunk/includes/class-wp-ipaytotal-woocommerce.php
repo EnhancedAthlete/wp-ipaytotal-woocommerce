@@ -48,6 +48,26 @@ class WP_IPayTotal_WooCommerce {
 	protected $plugin_name;
 
 	/**
+	 * The path to the root folder of the plugin.
+	 *
+	 * @since    3.0.0
+	 * @access   protected
+	 * @var      string    $plugin_name    The filesystem path to the root of this plugin.
+	 */
+	protected $plugin_root_dir;
+
+	/**
+	 * The plugin's root path and filename. Use in place of `plugin_basename` which returns the path of the current file.
+	 *
+	 * @see plugin_basename()
+	 *
+	 * @since    3.0.0
+	 * @access   protected
+	 * @var      string    $plugin_name    The plugin's root path and filename.
+	 */
+	protected $plugin_basename;
+
+	/**
 	 * The current version of the plugin.
 	 *
 	 * @since    3.0.0
@@ -73,6 +93,10 @@ class WP_IPayTotal_WooCommerce {
 		}
 		$this->plugin_name = 'wp-ipaytotal-woocommerce';
 
+		$this->plugin_root_dir = dirname( dirname( __FILE__ ) );
+
+		$this->plugin_basename = ltrim( $this->plugin_root_dir . '/' . $this->plugin_name . '.php', '/' );
+
 		$this->load_dependencies();
 		$this->set_locale();
 		$this->define_admin_hooks();
@@ -87,7 +111,7 @@ class WP_IPayTotal_WooCommerce {
 	 * Include the following files that make up the plugin:
 	 *
 	 * - WP_IPayTotal_WooCommerce_Loader. Orchestrates the hooks of the plugin.
-	 * - WP_IPayTotal_WooCommerce_i18n. Defines internationalization functionality.
+	 * - WP_IPayTotal_WooCommerce_I18n. Defines internationalization functionality.
 	 * - WP_IPayTotal_WooCommerce_Admin. Defines all hooks for the admin area.
 	 * - WP_IPayTotal_WooCommerce_Public. Defines all hooks for the public side of the site.
 	 *
@@ -115,6 +139,7 @@ class WP_IPayTotal_WooCommerce {
 		 * The class responsible for defining all actions that occur in the admin area.
 		 */
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-ipaytotal-woocommerce-admin.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'admin/class-wp-ipaytotal-woocommerce-plugins-page.php';
 
 		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'public/class-wp-ipaytotal-woocommerce-public.php';
 
@@ -138,6 +163,13 @@ class WP_IPayTotal_WooCommerce {
 	}
 
 	/**
+	 * A publicly accessible reference to the plugins page object, e.g. for removing hooks.
+	 *
+	 * @var WP_IPayTotal_WooCommerce_Plugins_Page The object used for the plugins page.
+	 */
+	public $plugins_page;
+
+	/**
 	 * Register all of the hooks related to the admin area functionality
 	 * of the plugin.
 	 *
@@ -150,6 +182,10 @@ class WP_IPayTotal_WooCommerce {
 
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_styles' );
 		$this->loader->add_action( 'admin_enqueue_scripts', $plugin_admin, 'enqueue_scripts' );
+
+		$this->plugins_page = new WP_IPayTotal_WooCommerce_Plugins_Page( $this->get_plugin_name(), $this->get_version() );
+
+		$this->loader->add_filter( 'plugin_action_links_' . $this->plugin_basename, $this->plugins_page, 'plugin_action_links' );
 	}
 
 	/**

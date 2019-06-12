@@ -1,6 +1,6 @@
 <?php
 /**
- * Class wp-ipaytotal-woocommerce-test
+ * Class WP_IPayTotal_WooCommerce_Plugin_Test. Tests the root plugin file.
  *
  * @package wp-ipaytotal-woocommerce
  * @author Brian Henry <BrianHenryIE@gmail.com>
@@ -9,7 +9,7 @@
 /**
  * Verifies hooks and filters are correctly added during initialization
  */
-class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
+class WP_IPayTotal_WooCommerce_Plugin_Test extends WP_UnitTestCase {
 
 	/**
 	 * AFAICT, this will fail until a translation has been added.
@@ -87,69 +87,6 @@ class WP_IPayTotal_WooCommerce_Test extends WP_UnitTestCase {
 
 		$this->assertContains( 'WOWP_IPTWPG_IPayTotal', $woocommerce_payment_gateways );
 
-	}
-
-	/**
-	 * Ensure the `wowp_iptwpg_ipaytotal_action_links` function is added to the `plugin_action_links_*` fitler.
-	 */
-	public function test_add_filter_plugin_action_links_wowp_iptwpg_ipaytotal_action_links() {
-
-		global $plugin_root_dir;
-
-		$plugin_basename = $plugin_root_dir . '/wp-ipaytotal-woocommerce.php';
-
-		$filter_name       = 'plugin_action_links_' . ltrim( $plugin_basename, '/' );
-		$expected_priority = 10;
-		$function          = 'wowp_iptwpg_ipaytotal_action_links';
-
-		$actual_filter_priority = has_filter( $filter_name, $function );
-
-		$this->assertNotFalse( $actual_filter_priority );
-
-		$this->assertEquals( $expected_priority, $actual_filter_priority );
-	}
-
-	/**
-	 * Verify the content of the action links.
-	 *
-	 * TODO: The Deactivate link isn't returned when the filter is run in the test, suggesting it's
-	 * not being run on plugins.php page as it should.
-	 *
-	 * phpcs:disable WordPress.NamingConventions.ValidVariableName.UsedPropertyNotSnakeCase
-	 * phpcs:disable WordPress.PHP.NoSilencedErrors.Discouraged
-	 */
-	public function test_wowp_iptwpg_ipaytotal_action_links() {
-
-		$expected_anchor    = get_site_url() . '/wp-admin/admin.php?page=wc-settings&tab=checkout';
-		$expected_link_text = 'Settings';
-
-		global $plugin_root_dir;
-
-		$plugin_basename = $plugin_root_dir . '/wp-ipaytotal-woocommerce.php';
-
-		$filter_name = 'plugin_action_links_' . ltrim( $plugin_basename, '/' );
-
-		$this->go_to( '/wp-admin/plugins.php' );
-
-		$plugin_action_links = apply_filters( $filter_name, array() );
-
-		$first_link = $plugin_action_links[0];
-
-		$dom = new DOMDocument();
-
-		@$dom->loadHtml( mb_convert_encoding( $first_link, 'HTML-ENTITIES', 'UTF-8' ) );
-
-		$nodes = $dom->getElementsByTagName( 'a' );
-
-		$this->assertEquals( 1, $nodes->length );
-
-		$node = $nodes->item( 0 );
-
-		$actual_anchor    = $node->getAttribute( 'href' );
-		$actual_link_text = $node->nodeValue;
-
-		$this->assertEquals( $expected_anchor, $actual_anchor );
-		$this->assertEquals( $expected_link_text, $actual_link_text );
 	}
 
 	/**

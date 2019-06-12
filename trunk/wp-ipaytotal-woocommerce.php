@@ -29,7 +29,8 @@ define( 'WP_IPAYTOTAL_WOOCOMMERCE_VERSION', '3.0.0' );
 
 require plugin_dir_path( __FILE__ ) . 'includes/class-wp-ipaytotal-woocommerce.php';
 
-$wp_ipaytotal_woocommerce = new WP_IPayTotal_WooCommerce();
+// phpcs:disable Squiz.PHP.DisallowMultipleAssignments.Found
+$GLOBALS['wp_ipaytotal_woocommerce'] = $wp_ipaytotal_woocommerce = new WP_IPayTotal_WooCommerce();
 $wp_ipaytotal_woocommerce->run();
 
 
@@ -73,23 +74,6 @@ function wowp_iptwpg_ipaytotal_init() {
 }
 
 add_action( 'plugins_loaded', 'wowp_iptwpg_ipaytotal_init', 0 );
-
-
-/**
- * Add link to settings page in plugins.php list.
- *
- * @param array $links The existing plugin links (usually "Deactivate").
- *
- * @return array The links to display below the plugin name on plugins.php.
- */
-function wowp_iptwpg_ipaytotal_action_links( $links ) {
-	$plugin_links = array(
-		'<a href="' . admin_url( 'admin.php?page=wc-settings&tab=checkout' ) . '">' . __( 'Settings', 'wp-ipaytotal-woocommerce' ) . '</a>',
-	);
-	return array_merge( $plugin_links, $links );
-}
-
-add_filter( 'plugin_action_links_' . plugin_basename( __FILE__ ), 'wowp_iptwpg_ipaytotal_action_links' );
 
 
 /**
