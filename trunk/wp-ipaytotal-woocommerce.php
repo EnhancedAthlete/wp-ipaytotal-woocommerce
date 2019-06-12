@@ -21,6 +21,18 @@
  * WC tested up to: 4.9.8
  */
 
+if ( ! defined( 'WPINC' ) ) {
+	die;
+}
+
+define( 'WP_IPAYTOTAL_WOOCOMMERCE_VERSION', '3.0.0' );
+
+require plugin_dir_path( __FILE__ ) . 'includes/class-wp-ipaytotal-woocommerce.php';
+
+$wp_ipaytotal_woocommerce = new WP_IPayTotal_WooCommerce();
+$wp_ipaytotal_woocommerce->run();
+
+
 /**
  * Tell WordPress to load a translation file if it exists for the user's language
  */
