@@ -145,6 +145,29 @@ class WP_IPayTotal_WooCommerce {
 
 		$this->loader = new WP_IPayTotal_WooCommerce_Loader();
 
+		$this->loader->add_action( 'plugins_loaded', $this, 'woocommerce_init', 0, 1 );
+	}
+
+	/**
+	 * Load requirements which are dependent on WooCommerce files being loaded first.
+	 */
+	public function woocommerce_init() {
+
+		if ( ! class_exists( 'WC_Payment_Gateway_CC' ) ) {
+			return;
+		}
+
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wowp-iptwpg-ipaytotal.php';
+		require_once plugin_dir_path( dirname( __FILE__ ) ) . 'includes/class-wowp-iptwpg-ipaytotal-api.php';
+
+		add_filter( 'woocommerce_payment_gateways', array( $this, 'add_gateway_to_woocommerce' ) );
+	}
+
+	public function add_gateway_to_woocommerce( $gateways ) {
+
+		$gateways[] = 'WOWP_IPTWPG_IPayTotal';
+
+		return $gateways;
 	}
 
 	/**

@@ -35,38 +35,6 @@ $wp_ipaytotal_woocommerce->run();
 
 
 /**
- * Plugin initialization.
- *
- * Checks if WC_Payment_Gateway_CC class exists, then loads the plugin files and adds gateway to WooCommerce.
- */
-function wowp_iptwpg_ipaytotal_init() {
-
-	if ( ! class_exists( 'WC_Payment_Gateway_CC' ) ) {
-		return;
-	}
-
-	include_once 'includes/class-wowp-iptwpg-ipaytotal.php';
-	include_once 'includes/class-wowp-iptwpg-ipaytotal-api.php';
-
-	add_filter( 'woocommerce_payment_gateways', 'wowp_iptwpg_add_ipaytotal_gateway' );
-
-	/**
-	 * Registers the payment gateway class with WooCommerce.
-	 *
-	 * @param array $methods List of WooCommerce payment gateway classnames.
-	 *
-	 * @return array
-	 */
-	function wowp_iptwpg_add_ipaytotal_gateway( $methods ) {
-		$methods[] = 'WOWP_IPTWPG_IPayTotal';
-		return $methods;
-	}
-}
-
-add_action( 'plugins_loaded', 'wowp_iptwpg_ipaytotal_init', 0 );
-
-
-/**
  * Replaces default credit card fields with iPayTotal required fields.
  *
  * @see WC_Payment_Gateway_CC
