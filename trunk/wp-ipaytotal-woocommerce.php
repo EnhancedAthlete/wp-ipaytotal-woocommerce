@@ -35,16 +35,6 @@ $wp_ipaytotal_woocommerce->run();
 
 
 /**
- * Tell WordPress to load a translation file if it exists for the user's language
- */
-function wowp_iptwpg_load_plugin_textdomain() {
-	load_plugin_textdomain( 'wp-ipaytotal-woocommerce', false, dirname( plugin_basename( __FILE__ ) ) . '/languages/' );
-}
-
-add_action( 'plugins_loaded', 'wowp_iptwpg_load_plugin_textdomain' );
-
-
-/**
  * Plugin initialization.
  *
  * Checks if WC_Payment_Gateway_CC class exists, then loads the plugin files and adds gateway to WooCommerce.

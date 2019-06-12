@@ -11,39 +11,6 @@
  */
 class WP_IPayTotal_WooCommerce_Plugin_Test extends WP_UnitTestCase {
 
-	/**
-	 * AFAICT, this will fail until a translation has been added.
-	 *
-	 * @see https://gist.github.com/GaryJones/c8259da3a4501fd0648f19beddce0249
-	 */
-	public function test_wowp_iptwpg_load_plugin_textdomain() {
-
-		$this->markTestSkipped( 'Needs translation.' );
-
-		global $plugin_root_dir;
-
-		$this->assertTrue( file_exists( $plugin_root_dir . '/languages/' ) );
-
-		// Seems to fail because there are no translations to load.
-		$this->assertTrue( is_textdomain_loaded( 'wp-ipaytotal-woocommerce' ) );
-
-	}
-
-	/**
-	 * Ensure the function which calls `load_plugin_textdomain` is enqueued at the `plugins_loaded` action.
-	 */
-	public function test_add_action_plugins_loaded_wowp_iptwpg_load_plugin_textdomain() {
-
-		$action_name       = 'plugins_loaded';
-		$expected_priority = 10;
-		$function          = 'wowp_iptwpg_load_plugin_textdomain';
-
-		$actual_action_priority = has_action( $action_name, $function );
-
-		$this->assertNotFalse( $actual_action_priority );
-
-		$this->assertEquals( $expected_priority, $actual_action_priority );
-	}
 
 	/**
 	 * Ensure the `wowp_iptwpg_ipaytotal_init` method is added to the `plugins_loaded` action.

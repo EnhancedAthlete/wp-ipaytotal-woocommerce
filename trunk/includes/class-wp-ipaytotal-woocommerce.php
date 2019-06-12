@@ -148,6 +148,13 @@ class WP_IPayTotal_WooCommerce {
 	}
 
 	/**
+	 * A publicly accessible reference to the i18n object, e.g. for removing hooks.
+	 *
+	 * @var WP_IPayTotal_WooCommerce_I18n The i18n object.
+	 */
+	public $i18n;
+
+	/**
 	 * Define the locale for this plugin for internationalization.
 	 *
 	 * Uses the WP_IPayTotal_WooCommerce_i18n class in order to set the domain and to register the hook
@@ -158,7 +165,9 @@ class WP_IPayTotal_WooCommerce {
 	 */
 	private function set_locale() {
 
-		$plugin_i18n = new WP_IPayTotal_WooCommerce_I18n();
+		$this->i18n = new WP_IPayTotal_WooCommerce_I18n();
+
+		$this->loader->add_action( 'plugins_loaded', $this->i18n, 'load_plugin_textdomain' );
 
 	}
 
