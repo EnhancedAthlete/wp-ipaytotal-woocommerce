@@ -20,9 +20,27 @@ We will activate your account for live transactions.
 
 ## Develop
 
-Run `composer install` to install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), the  [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards), [WP_Mock](https://github.com/10up/wp_mock) (and its [PHP Unit 7](https://github.com/sebastianbergmann/phpunit) dependency) and wordpress-develop testing environment.
+To install [PHP_CodeSniffer](https://github.com/squizlabs/PHP_CodeSniffer), the  [WordPress Coding Standards](https://github.com/WordPress-Coding-Standards/WordPress-Coding-Standards), [WP_Mock](https://github.com/10up/wp_mock) (and its [PHP Unit 7](https://github.com/sebastianbergmann/phpunit) dependency) and wordpress-develop testing environment run:
 
-Run `vendor/bin/phpcs` to see WordPress Coding Standards errors and run `vendor/bin/phpcbf` to automatically correct them where possible.
+```
+composer install
+```
+
+### WordPress Coding Standards
+
+To see WordPress Coding Standards errors run:
+
+```
+vendor/bin/phpcs
+```
+
+To automatically correct them where possible run:
+
+```
+vendor/bin/phpcbf
+```
+
+### WP_Mock Tests
 
 WP_Mock tests can be run with:
 
@@ -30,14 +48,11 @@ WP_Mock tests can be run with:
 phpunit -c tests/wp-mock/phpunit.xml
 ```
 
-The wordpress-develop tests are configured to require a local [MySQL database](https://dev.mysql.com/downloads/mysql/) (which gets wiped each time) and this plugin is set to require a database called `wordpress_tests` and a user named `wordpress-develop` with the password `wordpress-develop`. These tests also require PHP Unit 6, which can be downloaded and make executable with:
+### WordPress-Develop Tests
 
-```
-wget https://phar.phpunit.de/phpunit-6.5.9.phar
-chmod +x phpunit-6.5.9.phar
-```
+The wordpress-develop tests are configured to require a local [MySQL database](https://dev.mysql.com/downloads/mysql/) (which gets wiped each time) and this plugin is set to require a database called `wordpress_tests` and a user named `wordpress-develop` with the password `wordpress-develop`. 
 
-Open MySQL shell:
+To setup the database, open MySQL shell:
 
 ```
 mysql -u root -p
@@ -60,4 +75,8 @@ The wordpress-develop tests can then be run with:
 ```
 phpunit -c tests/wordpress-develop/phpunit.xml 
 ```
+
+### Code Coverage
+
+Code coverage reporting requires [Xdebug](https://xdebug.org/) installed.
 
