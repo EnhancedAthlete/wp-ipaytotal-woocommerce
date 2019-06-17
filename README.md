@@ -58,6 +58,6 @@ quit
 The wordpress-develop tests can then be run with:
 
 ```
-./phpunit-6.5.9.phar -c tests/wordpress-develop/phpunit.xml 
+phpunit -c tests/wordpress-develop/phpunit.xml 
 ```
 
