@@ -20,7 +20,7 @@ class WOWP_IPTWPG_IPayTotal_Test extends WP_UnitTestCase {
 		parent::setUp();
 
 		global $project_root_dir;
-		require_once $project_root_dir . '/vendor/cyruscollier/wordpress-develop/src/wp-includes/class-wp-error.php';
+		require_once $project_root_dir . '/vendor/wordpress/wordpress/src/wp-includes/class-wp-error.php';
 
 	}
 
