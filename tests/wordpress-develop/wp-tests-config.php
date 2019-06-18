@@ -12,7 +12,7 @@
 // } else {
 // define( 'ABSPATH', dirname( __FILE__ ) . '/src/' );
 // }
-define( 'ABSPATH', dirname( __FILE__ ) . '/../../vendor/cyruscollier/wordpress-develop/src/' );
+define( 'ABSPATH', dirname( __FILE__ ) . '/../../vendor/wordpress/wordpress/src/' );
 
 
 /*

@@ -6,8 +6,18 @@
         convertNoticesToExceptions="true"
         convertWarningsToExceptions="true">
     <testsuites>
-        <testsuite>
-            <directory prefix="" suffix="test.php">.</directory>
+        <testsuite name="wordpress-develop">
+            <directory suffix="test.php">.</directory>
         </testsuite>
     </testsuites>
+    <filter>
+        <whitelist>
+            <directory suffix=".php">../../trunk/</directory>
+        </whitelist>
+    </filter>
+    <logging>
+        <log type="coverage-clover" target="reports/logs/clover.xml"/>
+        <log type="coverage-html" target="reports/coverage"/>
+        <log type="testdox-text" target="reports/testdox/executed.txt"/>
+    </logging>
 </phpunit>

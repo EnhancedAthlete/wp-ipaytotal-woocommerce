@@ -2,3 +2,5 @@
 vendor
 *.phar
 .DS_Store
+reports
+

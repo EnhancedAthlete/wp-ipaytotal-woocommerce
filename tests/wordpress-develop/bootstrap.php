@@ -9,7 +9,7 @@
 $project_root_dir = dirname( dirname( dirname( __FILE__ ) ) );
 $plugin_root_dir  = $project_root_dir . '/trunk';
 
-$_tests_dir = $project_root_dir . '/vendor/cyruscollier/wordpress-develop/tests/phpunit';
+$_tests_dir = $project_root_dir . '/vendor/wordpress/wordpress/tests/phpunit';
 
 $_wp_tests_config = $project_root_dir . '/tests/wordpress-develop/wp-tests-config.php';
 
@@ -18,7 +18,7 @@ if ( ! file_exists( $_wp_tests_config ) ) {
 	exit( 1 );
 }
 
-define( 'WP_CONFIG_FILE_PATH', $_wp_tests_config );
+define( 'WP_TESTS_CONFIG_FILE_PATH', $_wp_tests_config );
 
 $_woocommerce_bootstrap = $project_root_dir . '/vendor/woocommerce/woocommerce/tests/bootstrap.php';
 
