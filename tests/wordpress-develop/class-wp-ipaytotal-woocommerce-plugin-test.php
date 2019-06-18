@@ -11,6 +11,9 @@
  */
 class WP_IPayTotal_WooCommerce_Plugin_Test extends WP_UnitTestCase {
 
+	/**
+	 * Test the main plugin object is added to the GLOBALS and that it is the correct class.
+	 */
 	public function test_plugin_instantiated() {
 
 		$this->assertArrayHasKey( 'wp_ipaytotal_woocommerce', $GLOBALS );

@@ -5,6 +5,9 @@
     <rule ref="WordPress">
         <!-- Because iPayTotal does not start with a capital letter: -->
         <exclude name="Generic.Commenting.DocComment.ShortNotCapital" />
+
+        <exclude name="Squiz.Commenting.FileComment.DuplicateAuthorTag" />
+
     </rule>
 
 

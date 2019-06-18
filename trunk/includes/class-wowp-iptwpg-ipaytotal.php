@@ -241,6 +241,8 @@ class WOWP_IPTWPG_IPayTotal extends WC_Payment_Gateway_CC {
 	 *
 	 * @return array
 	 * @throws Exception When a connection to the gateway cannot be created (presumably a local error).
+	 *
+	 * phpcs:disable WordPress.Security.NonceVerification.Missing
 	 */
 	public function process_payment( $order_id ) {
 		global $woocommerce;

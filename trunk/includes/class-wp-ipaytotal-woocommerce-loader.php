@@ -2,7 +2,7 @@
 /**
  * Register all actions and filters for the plugin
  *
- * @link       https://ipaytotal.com/c
+ * @link       https://ipaytotal.com/
  * @since      3.0.0
  *
  * @package    WP_IPayTotal_WooCommerce

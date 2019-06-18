@@ -37,6 +37,8 @@ class WOWP_IPTWPG_IPayTotal_API {
 	 * WOWP_IPTWPG_iPayTotal_API constructor.
 	 *
 	 * Parses credit card details from POST.
+	 *
+	 * phpcs:disable WordPress.Security.NonceVerification.Missing
 	 */
 	public function __construct() {
 

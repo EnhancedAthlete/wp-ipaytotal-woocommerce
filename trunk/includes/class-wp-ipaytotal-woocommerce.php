@@ -163,6 +163,15 @@ class WP_IPayTotal_WooCommerce {
 		add_filter( 'woocommerce_payment_gateways', array( $this, 'add_gateway_to_woocommerce' ) );
 	}
 
+	/**
+	 * Adds the classname to the list of WooCommerce gateways on the `woocommerce_payment_gateways` fitler.
+	 *
+	 * @see WC_Payment_Gateways::init()
+	 *
+	 * @param string[] $gateways The WooCommerce gateway classes.
+	 *
+	 * @return string[] The WooCommerce gateway classes.
+	 */
 	public function add_gateway_to_woocommerce( $gateways ) {
 
 		$gateways[] = 'WOWP_IPTWPG_IPayTotal';
