@@ -78,5 +78,5 @@ phpunit -c tests/wordpress-develop/phpunit.xml
 
 ### Code Coverage
 
-Code coverage reporting requires [Xdebug](https://xdebug.org/) installed.
+Code coverage reporting requires [Xdebug](https://xdebug.org/) installed. Reports are output to `tests/wordpress-develop/reports` and `tests/wp-mock/reports`.
 
